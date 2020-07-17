@@ -18,12 +18,18 @@ public class Player : MonoBehaviour
 	private CharacterController Controller;
 	private Animator Animator;
 
+	public Weapon Weapon;
+	private Animator WeaponAnimator;
+
     // Start is called before the first frame update
     void Start()
     {
 		// Get components
 		Controller = GetComponent<CharacterController>();
 		Animator = GetComponent<Animator>();
+
+		// Get the weapon animator
+		WeaponAnimator = Weapon?.gameObject.GetComponentInChildren<Animator>();
 
 		// Zero out the movement velocity
 		Velocity = Vector3.zero;
@@ -38,6 +44,8 @@ public class Player : MonoBehaviour
     {
 		// Handle movement
 		Move();
+		// Handle Attacking
+		Attack();
 		// Handle animations
 		Animate();
 	}
@@ -55,13 +63,23 @@ public class Player : MonoBehaviour
 		Vector3 VerticalVelocity = new Vector3(0, CurrentVerticalSpeed, 0);
 		// Apply vertical velocity vector
 		Controller.Move(VerticalVelocity * MoveSpeed * Time.deltaTime);
+	}
 
+	void Attack()
+	{
+		// Make sure the weapon is facing the right way (fixed for inverted animation direction)
+		if (Velocity != Vector3.zero) Weapon.transform.forward = -Velocity.normalized;
+		// Play the attack animation
+		if (Input.GetButtonDown("Attack"))
+		{
+			WeaponAnimator?.SetTrigger("Attack");
+		}
 	}
 
 	void Animate()
 	{
-		Animator.SetFloat("HorizontalSpeed", Velocity.x);
-		Animator.SetFloat("VerticalSpeed", Velocity.z);
+		Animator?.SetFloat("HorizontalSpeed", Velocity.x);
+		Animator?.SetFloat("VerticalSpeed", Velocity.z);
 
 		if (RunningEnabled)
 		{
