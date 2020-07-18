@@ -1,12 +1,18 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Monster : MonoBehaviour
 {
 	public float MoveSpeed;
 	private Vector3 Velocity;
 	public float PlayerFollowDistance = 2f;
+
+	public int AveragePointValue = 5;
+	public int PointValueMultiplier = 10;
+	public TMP_Text PointLabel;
+	public int PointValue { get; private set; }
 
 	private Player Player;
 	private Rigidbody Rigidbody;
@@ -19,6 +25,11 @@ public class Monster : MonoBehaviour
 		Animator = GetComponent<Animator>();
 		Player = FindObjectOfType<Player>();
 		Rigidbody = GetComponent<Rigidbody>();
+
+		// Set the point value and label
+		int min = Mathf.Max(0, AveragePointValue - 2);
+		PointValue = Random.Range(min, AveragePointValue + 2) * PointValueMultiplier;
+		PointLabel?.SetText("+" + PointValue);
 	}
 
     // Update is called once per frame
