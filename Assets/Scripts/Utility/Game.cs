@@ -7,6 +7,7 @@ public class Game : MonoBehaviour
 {
 	// Dev cheats control
 	public bool DevControls = false;
+	private bool Paused = false;
 
 	// Service objects
 	public OverworldCamera OverworldCamera;
@@ -16,15 +17,10 @@ public class Game : MonoBehaviour
 	{
 		if (DevControls)
 		{
-			if (Input.GetKey(KeyCode.LeftShift))
+			if (!Paused)
 			{
-				// Speed up time
-				Time.timeScale = 2f;
-			}
-			else
-			{
-				// Set timescale back to normal
-				Time.timeScale = 1f;
+				if (Input.GetKey(KeyCode.LeftShift)) Time.timeScale = 2f; // Speed up time
+				else Time.timeScale = 1f; // Set timescale back to normal
 			}
 
 			if (Input.GetKeyDown(KeyCode.Escape))
@@ -37,6 +33,14 @@ public class Game : MonoBehaviour
 			{
 				// Reload the current scene
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+			}
+
+			if (Input.GetKeyDown(KeyCode.Return))
+			{
+				// Toggle pausing the game
+				if (!Paused) Time.timeScale = 0f;
+				else Time.timeScale = 1f;
+				Paused = !Paused;
 			}
 		}
 	}
