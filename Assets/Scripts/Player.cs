@@ -12,9 +12,6 @@ public class Player : MonoBehaviour
 	private Vector3 Velocity;
 	private bool RunningEnabled = false;
 
-	public int InitialHearts = 20;
-	public int Hearts { get; private set; }
-
 	private CharacterController Controller;
 	private Animator Animator;
 
@@ -34,9 +31,6 @@ public class Player : MonoBehaviour
 		// Zero out the movement velocity
 		Velocity = Vector3.zero;
 		CurrentVerticalSpeed = 0f;
-
-		// Set the initial heart count
-		Hearts = InitialHearts;
     }
 
     // Update is called once per frame
