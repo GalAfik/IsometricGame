@@ -9,7 +9,7 @@ public class Game : MonoBehaviour
 	public bool DevControls = false;
 
 	// Service objects
-
+	public OverworldCamera OverworldCamera;
 
 	// Update is called once per frame
 	void Update()
@@ -38,6 +38,18 @@ public class Game : MonoBehaviour
 				// Reload the current scene
 				SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 			}
+		}
+	}
+
+	public void LoadLevel(string scene)
+	{
+		try
+		{
+			SceneManager.LoadScene(scene);
+		}
+		catch (System.Exception)
+		{
+			print("This level is not available in the scene manager!");
 		}
 	}
 }
