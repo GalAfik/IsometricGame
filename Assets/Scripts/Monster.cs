@@ -30,6 +30,10 @@ public class Monster : MonoBehaviour
 		int min = Mathf.Max(0, AveragePointValue - 2);
 		PointValue = Random.Range(min, AveragePointValue + 2) * PointValueMultiplier;
 		PointLabel?.SetText("+" + PointValue);
+
+		// Start the Idle animation on a random frame to vary monster animations
+		AnimatorStateInfo state = Animator.GetCurrentAnimatorStateInfo(0);
+		Animator.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
 	}
 
     // Update is called once per frame

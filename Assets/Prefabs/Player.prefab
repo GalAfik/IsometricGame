@@ -570,7 +570,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 64e1d6ee3bda1ca4483b93ee0fbbef0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  CurrentHealth: 5
+  InitialHealth: 5
   Hearts:
   - {fileID: 0}
   - {fileID: 0}
