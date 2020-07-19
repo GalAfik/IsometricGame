@@ -74,7 +74,6 @@ public class Monster : MonoBehaviour
 
 	private IEnumerator OnTriggerEnter(Collider other)
 	{
-		print(other.name);
 		if (other.CompareTag("Weapon"))
 		{
 			// Set the death animation

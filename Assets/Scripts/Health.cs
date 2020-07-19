@@ -6,7 +6,9 @@ using UnityEngine.UI;
 public class Health : MonoBehaviour
 {
 	public int InitialHealth = 5;
-	private int CurrentHealth;
+	public int CurrentHealth { get; set; }
+	public int MaxHearts { get; private set; }
+	private int MaxBlueHearts;
 
 	public Image[] Hearts;
 	public Image[] BlueHearts;
@@ -14,19 +16,21 @@ public class Health : MonoBehaviour
 	private void Start()
 	{
 		CurrentHealth = InitialHealth;
+		MaxHearts = Hearts.Length;
+		MaxBlueHearts = BlueHearts.Length;
 	}
 
 	// Update is called once per frame
 	void Update()
     {
 		// Make sure Health doesn't exceed Hearts + Bonus hearts
-		if (CurrentHealth > Hearts.Length + BlueHearts.Length)
+		if (CurrentHealth > MaxHearts + MaxBlueHearts)
 		{
-			CurrentHealth = Hearts.Length + BlueHearts.Length;
+			CurrentHealth = MaxHearts + MaxBlueHearts;
 		}
 
 		// Show all available hearts
-		for (int i = 0; i < Hearts.Length; i++)
+		for (int i = 0; i < MaxHearts; i++)
 		{
 			// Only show hearts that the player has
 			if (i < CurrentHealth) Hearts[i].enabled = true;
@@ -34,10 +38,10 @@ public class Health : MonoBehaviour
 		}
 
 		// Show all available blue hearts (excess health over the max red hearts)
-		for (int i = 0; i < BlueHearts.Length; i++)
+		for (int i = 0; i < MaxBlueHearts; i++)
 		{
 			// Only show hearts that the player has
-			if (i < CurrentHealth - Hearts.Length) BlueHearts[i].enabled = true;
+			if (i < CurrentHealth - MaxHearts) BlueHearts[i].enabled = true;
 			else BlueHearts[i].enabled = false;
 		}
 	}

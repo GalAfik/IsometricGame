@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [RequireComponent(typeof(CharacterController))]
+[RequireComponent(typeof(Health))]
 
 public class Player : MonoBehaviour
 {
@@ -91,5 +92,15 @@ public class Player : MonoBehaviour
 	private void OnTriggerExit(Collider other)
 	{
 		if (other.CompareTag("WalkZone")) RunningEnabled = true;
+	}
+
+	public int GetHealth() { return GetComponent<Health>().CurrentHealth; }
+	public int GetMaxHearts() { return GetComponent<Health>().MaxHearts; }
+
+	public void SetHealth(int health)
+	{
+		// Make sure health never goes below zero
+		if (health < 0) health = 0;
+		GetComponent<Health>().CurrentHealth = health;
 	}
 }
