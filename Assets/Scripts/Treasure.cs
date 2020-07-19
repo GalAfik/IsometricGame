@@ -13,8 +13,11 @@ public class Treasure : MonoBehaviour
 	}
 
 	public TreasureSize Size = TreasureSize.COINS;
-	public int PointValue = 5;
-	public TMP_Text Label;
+	public int AveragePointValue = 5;
+	private int PointValueMultiplier = 5;
+	public TMP_Text PointLabel;
+	public int PointValue { get; private set; }
+
 	// Physical object selection
 	public GameObject CoinsObject;
 	public GameObject PileObject;
@@ -26,18 +29,25 @@ public class Treasure : MonoBehaviour
 		// Enable the correct treasure size object
 		switch (Size)
 		{
-			case TreasureSize.PILE:
+			case TreasureSize.PILE: // PILE
 				PileObject.SetActive(true);
+				PointValueMultiplier = 10;
 				break;
-			case TreasureSize.HORDE:
+			case TreasureSize.HORDE: // HORDE
 				HordeObject.SetActive(true);
+				PointValueMultiplier = 50;
 				break;
-			default:
+			default: // COINE
 				CoinsObject.SetActive(true);
+				PointValueMultiplier = 5;
 				break;
 		}
 
-		 // Set the point value label
-		Label?.SetText("+" + PointValue);
+		// Set the point value based on the treasure size
+		int min = Mathf.Max(0, AveragePointValue - 2);
+		PointValue = Random.Range(min, AveragePointValue + 2) * PointValueMultiplier;
+
+		// Set the point value label
+		PointLabel?.SetText("+" + PointValue);
     }
 }

@@ -83,8 +83,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Size: 1
-  PointValue: 5
-  Label: {fileID: 8527275814346391686}
+  AveragePointValue: 5
+  PointValueMultiplier: 5
+  PointLabel: {fileID: 8527275814346391686}
   CoinsObject: {fileID: 8687363639408668009}
   PileObject: {fileID: 4445755984186321881}
   HordeObject: {fileID: 8650818248396458277}
