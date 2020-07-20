@@ -5,6 +5,7 @@ using UnityEngine;
 public class SavePoint : MonoBehaviour
 {
 	private Animator Animator;
+	private bool Activated = false;
 
 	private void Start()
 	{
@@ -12,10 +13,17 @@ public class SavePoint : MonoBehaviour
 	}
 	private void OnTriggerEnter(Collider other)
 	{
-		if (other.CompareTag("Player"))
+		if (other.CompareTag("Player") && !Activated)
 		{
+			Activated = true;
 			// Play the activation animation sequence
 			Animator.SetTrigger("Activated");
+
+			// Fully heal the player
+			if (other.GetComponent<Player>().GetHealth() < other.GetComponent<Player>().GetMaxHearts())
+			{
+				other.GetComponent<Player>().SetHealth(other.GetComponent<Player>().GetMaxHearts());
+			}
 		}
 	}
 }

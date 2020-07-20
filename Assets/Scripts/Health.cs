@@ -18,6 +18,16 @@ public class Health : MonoBehaviour
 		CurrentHealth = InitialHealth;
 		MaxHearts = Hearts.Length;
 		MaxBlueHearts = BlueHearts.Length;
+
+		// Disable all hearts before the game starts
+		foreach (Image heart in Hearts)
+		{
+			heart.enabled = false;
+		}
+		foreach (Image heart in BlueHearts)
+		{
+			heart.enabled = false;
+		}
 	}
 
 	// Update is called once per frame
@@ -30,10 +40,21 @@ public class Health : MonoBehaviour
 		}
 
 		// Show all available hearts
+		StartCoroutine(EnableHearts());
+	}
+
+	private IEnumerator EnableHearts()
+	{
+		// Show all red hearts
 		for (int i = 0; i < MaxHearts; i++)
 		{
 			// Only show hearts that the player has
-			if (i < CurrentHealth) Hearts[i].enabled = true;
+			if (i < CurrentHealth)
+			{
+				Hearts[i].enabled = true;
+				Hearts[i].GetComponent<Heart>().TriggerEnableAnimation();
+				yield return new WaitForSeconds(0.1f);
+			}
 			else Hearts[i].enabled = false;
 		}
 
@@ -41,7 +62,12 @@ public class Health : MonoBehaviour
 		for (int i = 0; i < MaxBlueHearts; i++)
 		{
 			// Only show hearts that the player has
-			if (i < CurrentHealth - MaxHearts) BlueHearts[i].enabled = true;
+			if (i < CurrentHealth - MaxHearts)
+			{
+				BlueHearts[i].enabled = true;
+				BlueHearts[i].GetComponent<Heart>().TriggerEnableAnimation();
+				yield return new WaitForSeconds(0.1f);
+			}
 			else BlueHearts[i].enabled = false;
 		}
 	}
