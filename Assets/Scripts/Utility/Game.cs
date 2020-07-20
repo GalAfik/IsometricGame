@@ -11,6 +11,7 @@ public class Game : MonoBehaviour
 
 	// Service objects
 	public OverworldCamera OverworldCamera;
+	public MessageSystem MessageSystem;
 
 	// Update is called once per frame
 	void Update()
@@ -41,6 +42,11 @@ public class Game : MonoBehaviour
 				if (!Paused) Time.timeScale = 0f;
 				else Time.timeScale = 1f;
 				Paused = !Paused;
+			}
+
+			if (Input.GetKeyDown(KeyCode.M))
+			{
+				MessageSystem.DisplayMessage("This is a test!!!");
 			}
 		}
 	}

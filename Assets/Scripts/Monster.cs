@@ -5,6 +5,8 @@ using TMPro;
 
 public class Monster : MonoBehaviour
 {
+	public int Damage = 1;
+
 	public float MoveSpeed;
 	private Vector3 Velocity;
 	public float PlayerFollowDistance = 2f;
@@ -81,6 +83,15 @@ public class Monster : MonoBehaviour
 			// Wait a few seconds before destroying this object
 			yield return new WaitForSeconds(3f);
 			Destroy(gameObject);
+		}
+	}
+
+	private void OnCollisionEnter(Collision collision)
+	{
+		if (collision.gameObject.CompareTag("Player"))
+		{
+			// Damage the player
+			collision.gameObject.GetComponent<Player>().SetHealth(collision.gameObject.GetComponent<Player>().GetHealth() - Damage);
 		}
 	}
 }

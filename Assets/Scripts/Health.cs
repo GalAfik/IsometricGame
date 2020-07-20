@@ -10,40 +10,28 @@ public class Health : MonoBehaviour
 	public int MaxHearts { get; private set; }
 	private int MaxBlueHearts;
 
-	public Image[] Hearts;
-	public Image[] BlueHearts;
+	public Heart[] Hearts;
+	public Heart[] BlueHearts;
 
 	private void Start()
 	{
 		CurrentHealth = InitialHealth;
 		MaxHearts = Hearts.Length;
 		MaxBlueHearts = BlueHearts.Length;
-
-		// Disable all hearts before the game starts
-		foreach (Image heart in Hearts)
-		{
-			heart.enabled = false;
-		}
-		foreach (Image heart in BlueHearts)
-		{
-			heart.enabled = false;
-		}
 	}
 
 	// Update is called once per frame
 	void Update()
     {
 		// Make sure Health doesn't exceed Hearts + Bonus hearts
-		if (CurrentHealth > MaxHearts + MaxBlueHearts)
-		{
-			CurrentHealth = MaxHearts + MaxBlueHearts;
-		}
+		if (CurrentHealth > MaxHearts + MaxBlueHearts) CurrentHealth = MaxHearts + MaxBlueHearts;
+		if (CurrentHealth < 0) CurrentHealth = 0;
 
 		// Show all available hearts
-		StartCoroutine(EnableHearts());
+		StartCoroutine(ShowHearts());
 	}
 
-	private IEnumerator EnableHearts()
+	private IEnumerator ShowHearts()
 	{
 		// Show all red hearts
 		for (int i = 0; i < MaxHearts; i++)
@@ -51,11 +39,15 @@ public class Health : MonoBehaviour
 			// Only show hearts that the player has
 			if (i < CurrentHealth)
 			{
-				Hearts[i].enabled = true;
-				Hearts[i].GetComponent<Heart>().TriggerEnableAnimation();
+				Hearts[i].GetComponent<Animator>().ResetTrigger("Break");
+				Hearts[i].GetComponent<Animator>().SetTrigger("Enable");
 				yield return new WaitForSeconds(0.1f);
 			}
-			else Hearts[i].enabled = false;
+			else if (Hearts[i].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Enable"))
+			{
+				Hearts[i].GetComponent<Animator>().ResetTrigger("Enable");
+				Hearts[i].GetComponent<Animator>().SetTrigger("Break");
+			}
 		}
 
 		// Show all available blue hearts (excess health over the max red hearts)
@@ -64,11 +56,15 @@ public class Health : MonoBehaviour
 			// Only show hearts that the player has
 			if (i < CurrentHealth - MaxHearts)
 			{
-				BlueHearts[i].enabled = true;
-				BlueHearts[i].GetComponent<Heart>().TriggerEnableAnimation();
+				BlueHearts[i].GetComponent<Animator>().ResetTrigger("Break");
+				BlueHearts[i].GetComponent<Animator>().SetTrigger("Enable");
 				yield return new WaitForSeconds(0.1f);
 			}
-			else BlueHearts[i].enabled = false;
+			else if (BlueHearts[i].GetComponent<Animator>().GetCurrentAnimatorStateInfo(0).IsName("Enable"))
+			{
+				BlueHearts[i].GetComponent<Animator>().ResetTrigger("Enable");
+				BlueHearts[i].GetComponent<Animator>().SetTrigger("Break");
+			}
 		}
 	}
 }

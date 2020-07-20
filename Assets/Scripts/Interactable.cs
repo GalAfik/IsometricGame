@@ -12,6 +12,10 @@ public class Interactable : MonoBehaviour
 	private void Start()
 	{
 		Animator = GetComponent<Animator>();
+
+		// Start the Idle animation on a random frame to vary monster animations
+		AnimatorStateInfo state = Animator.GetCurrentAnimatorStateInfo(0);
+		Animator.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
 	}
 
 	private void Update()
