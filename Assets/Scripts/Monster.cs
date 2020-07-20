@@ -80,6 +80,12 @@ public class Monster : MonoBehaviour
 		{
 			// Set the death animation
 			Animator?.SetTrigger("Dead");
+
+			// Add points
+			FindObjectOfType<Game>().SetPoints(FindObjectOfType<Game>().GetPoints() + PointValue);
+			// Immediately destroy the collider
+			Destroy(GetComponent<Collider>());
+
 			// Wait a few seconds before destroying this object
 			yield return new WaitForSeconds(3f);
 			Destroy(gameObject);

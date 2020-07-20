@@ -9,9 +9,19 @@ public class Game : MonoBehaviour
 	public bool DevControls = false;
 	private bool Paused = false;
 
+	// The total number of points the player has collected
+	private int Points = 0;
+	public int GetPoints() { return Points; }
+	public void SetPoints(int points)
+	{
+		Points = Mathf.Max(0, points);
+		PointsDisplay.Display();
+	}
+
 	// Service objects
 	public OverworldCamera OverworldCamera;
 	public MessageSystem MessageSystem;
+	public PointsDisplay PointsDisplay;
 
 	// Update is called once per frame
 	void Update()

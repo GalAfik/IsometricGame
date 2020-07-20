@@ -17,6 +17,7 @@ public class Treasure : MonoBehaviour
 	private int PointValueMultiplier = 5;
 	public TMP_Text PointLabel;
 	public int PointValue { get; private set; }
+	private bool Collected = false;
 
 	// Physical object selection
 	public GameObject CoinsObject;
@@ -50,4 +51,14 @@ public class Treasure : MonoBehaviour
 		// Set the point value label
 		PointLabel?.SetText("+" + PointValue);
     }
+
+	private void OnTriggerEnter(Collider other)
+	{
+		if (other.CompareTag("Player") && !Collected)
+		{
+			Collected = true;
+			// Add points
+			FindObjectOfType<Game>().SetPoints(FindObjectOfType<Game>().GetPoints() + PointValue);
+		}
+	}
 }

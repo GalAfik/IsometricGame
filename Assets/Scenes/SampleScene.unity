@@ -1556,6 +1556,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 593f9d8a84feca043a5513687d4da8a2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &463559559 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 5935970664757323785, guid: 84f96281b99291a49b61883d071643ad,
+    type: 3}
+  m_PrefabInstance: {fileID: 6379605029264910356}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7809c095b7279b143ab0c6d6093e88ce, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &476469432
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -7807,6 +7819,11 @@ PrefabInstance:
       propertyPath: MessageSystem
       value: 
       objectReference: {fileID: 6379605029264910396}
+    - target: {fileID: 2878540885512527560, guid: b51199d3ac9efa942adb95cbab19c41a,
+        type: 3}
+      propertyPath: PointsDisplay
+      value: 
+      objectReference: {fileID: 463559559}
     - target: {fileID: 4468458646386839462, guid: b51199d3ac9efa942adb95cbab19c41a,
         type: 3}
       propertyPath: m_LocalPosition.x
