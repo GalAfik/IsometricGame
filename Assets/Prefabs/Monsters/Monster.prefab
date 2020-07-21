@@ -464,6 +464,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 21776ab9c2bb9ef4a829feae12db0410, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  Damage: 1
   MoveSpeed: 2
   PlayerFollowDistance: 6
   AveragePointValue: 5

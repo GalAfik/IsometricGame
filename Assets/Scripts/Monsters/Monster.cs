@@ -8,7 +8,7 @@ public class Monster : MonoBehaviour
 	public int Damage = 1;
 
 	public float MoveSpeed;
-	private Vector3 Velocity;
+	protected Vector3 Velocity;
 	public float PlayerFollowDistance = 2f;
 
 	public int AveragePointValue = 5;
@@ -16,9 +16,9 @@ public class Monster : MonoBehaviour
 	public TMP_Text PointLabel;
 	public int PointValue { get; private set; }
 
-	private Player Player;
-	private Rigidbody Rigidbody;
-	private Animator Animator;
+	protected Player Player;
+	protected Rigidbody Rigidbody;
+	protected Animator Animator;
 
     // Start is called before the first frame update
     void Start()
@@ -47,7 +47,7 @@ public class Monster : MonoBehaviour
 		Animate();
     }
 
-	void Move()
+	protected virtual void Move()
 	{
 		// Zero out velocity
 		Velocity = Vector3.zero;
@@ -64,7 +64,7 @@ public class Monster : MonoBehaviour
 		Rigidbody.MovePosition(transform.position + Velocity);
 	}
 
-	void Animate()
+	protected virtual void Animate()
 	{
 		// Set the walking animation
 		Animator?.SetFloat("Speed", Velocity.magnitude);
@@ -97,7 +97,7 @@ public class Monster : MonoBehaviour
 		if (collision.gameObject.CompareTag("Player"))
 		{
 			// Damage the player
-			collision.gameObject.GetComponent<Player>().SetHealth(collision.gameObject.GetComponent<Player>().GetHealth() - Damage);
+			Player.SetHealth(Player.GetHealth() - Damage);
 		}
 	}
 }
