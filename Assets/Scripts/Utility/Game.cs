@@ -15,7 +15,7 @@ public class Game : MonoBehaviour
 	public void SetPoints(int points)
 	{
 		Points = Mathf.Max(0, points);
-		PointsDisplay.Display();
+		PointsDisplay.DisplayPoints();
 	}
 
 	// Service objects
