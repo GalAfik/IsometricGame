@@ -4,17 +4,27 @@ using UnityEngine;
 
 public class Lich : Monster
 {
+	public float PlayerBackAwayDistance = 4f;
+
 	protected override void Move()
 	{
 		// Zero out velocity
 		Velocity = Vector3.zero;
 
+		// PlayerBackAwayDistance cannot be greater than PlayerFollowDistance
+		Debug.Assert(PlayerBackAwayDistance < PlayerFollowDistance);
 		// If the player is within the threshold distance
-		Vector3 PlayerLatitude = new Vector3(Player.transform.position.x, 0, Player.transform.position.z);
-		if (Vector3.Distance(PlayerLatitude, transform.position) <= PlayerFollowDistance)
+		Vector3 playerLatitude = new Vector3(Player.transform.position.x, 0, Player.transform.position.z);
+		float distanceFromPlayer = Vector3.Distance(playerLatitude, transform.position);
+		if (distanceFromPlayer <= PlayerBackAwayDistance)
 		{
 			// Move away from the player when they get close
-			Velocity = -(PlayerLatitude - transform.position) * MoveSpeed * Time.deltaTime;
+			Velocity = -(playerLatitude - transform.position) * MoveSpeed * Time.deltaTime;
+		}
+		else if (distanceFromPlayer <= PlayerFollowDistance)
+		{
+			// Move toward the player when too far away
+			Velocity = (playerLatitude - transform.position) * MoveSpeed * Time.deltaTime;
 		}
 
 		// Apply velocity

@@ -552,3 +552,4 @@ MonoBehaviour:
   AveragePointValue: 10
   PointValueMultiplier: 10
   PointLabel: {fileID: 74203086801002539}
+  PlayerBackAwayDistance: 8

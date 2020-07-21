@@ -53,11 +53,11 @@ public class Monster : MonoBehaviour
 		Velocity = Vector3.zero;
 
 		// If the player is within the threshold distance
-		Vector3 PlayerLatitude = new Vector3(Player.transform.position.x, 0, Player.transform.position.z);
-		if (Vector3.Distance(PlayerLatitude, transform.position) <= PlayerFollowDistance)
+		Vector3 playerLatitude = new Vector3(Player.transform.position.x, 0, Player.transform.position.z);
+		if (Vector3.Distance(playerLatitude, transform.position) <= PlayerFollowDistance)
 		{
 			// Move towards the player
-			Velocity = (PlayerLatitude - transform.position) * MoveSpeed * Time.deltaTime;
+			Velocity = (playerLatitude - transform.position) * MoveSpeed * Time.deltaTime;
 		}
 
 		// Apply velocity
