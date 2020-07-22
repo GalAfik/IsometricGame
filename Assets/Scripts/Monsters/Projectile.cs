@@ -15,6 +15,9 @@ public class Projectile : MonoBehaviour
 	// Start is called before the first frame update
 	void Start()
 	{
+		// Detach from any other object
+		transform.parent = null;
+
 		// Get components
 		Player = FindObjectOfType<Player>();
 
@@ -48,7 +51,10 @@ public class Projectile : MonoBehaviour
 			// Damage the player
 			Player.SetHealth(Player.GetHealth() - Damage);
 		}
+	}
 
+	private void OnCollisionEnter(Collision collision)
+	{
 		// Destroy this object
 		Destroy(gameObject);
 	}

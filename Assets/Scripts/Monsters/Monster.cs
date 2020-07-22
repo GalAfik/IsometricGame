@@ -16,6 +16,10 @@ public class Monster : MonoBehaviour
 	public TMP_Text PointLabel;
 	public int PointValue { get; private set; }
 
+	public float AverageAttackFrequency = 5f;
+	public float AttackFrequencyRange = 2f;
+	protected float AttackTimer = 0;
+
 	protected Player Player;
 	protected Rigidbody Rigidbody;
 	protected Animator Animator;
@@ -36,6 +40,9 @@ public class Monster : MonoBehaviour
 		// Start the Idle animation on a random frame to vary monster animations
 		AnimatorStateInfo state = Animator.GetCurrentAnimatorStateInfo(0);
 		Animator.Play(state.fullPathHash, -1, Random.Range(0f, 1f));
+
+		// Reset the attack timer
+		AttackTimer = AverageAttackFrequency;
 	}
 
     // Update is called once per frame
@@ -43,6 +50,12 @@ public class Monster : MonoBehaviour
     {
 		// Handle movement
 		Move();
+		
+		// Handle Attacking
+		Attack();
+		// Work the attack timer
+		if (AttackTimer > 0) AttackTimer -= Time.deltaTime;
+
 		// Handle animations
 		Animate();
     }
@@ -63,6 +76,8 @@ public class Monster : MonoBehaviour
 		// Apply velocity
 		Rigidbody.MovePosition(transform.position + Velocity);
 	}
+
+	protected virtual void Attack() { }
 
 	protected virtual void Animate()
 	{
