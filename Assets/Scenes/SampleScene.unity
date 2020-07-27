@@ -3437,6 +3437,16 @@ PrefabInstance:
       propertyPath: PlayerFollowDistance
       value: 8
       objectReference: {fileID: 0}
+    - target: {fileID: 6065697227815227070, guid: 79f047dfee949284cb52bddf9c6703f5,
+        type: 3}
+      propertyPath: AverageAttackFrequency
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6065697227815227070, guid: 79f047dfee949284cb52bddf9c6703f5,
+        type: 3}
+      propertyPath: AttackFrequencyRange
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 8758616370734278112, guid: 79f047dfee949284cb52bddf9c6703f5,
         type: 3}
       propertyPath: m_Name
