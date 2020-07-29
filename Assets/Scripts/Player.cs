@@ -11,7 +11,7 @@ public class Player : MonoBehaviour
 	public float RunSpeed = 2f;
 	private float CurrentVerticalSpeed;
 	private Vector3 Velocity;
-	private bool RunningEnabled = false;
+	private bool RunningEnabled = true;
 
 	private CharacterController Controller;
 	private Animator Animator;
