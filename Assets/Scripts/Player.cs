@@ -16,6 +16,8 @@ public class Player : MonoBehaviour
 	private CharacterController Controller;
 	private Animator Animator;
 
+	public float AttackDelayTime = .5f;
+	private float AttackTimer = 0;
 	public Weapon Weapon;
 	private Animator WeaponAnimator;
 
@@ -65,10 +67,14 @@ public class Player : MonoBehaviour
 		// Make sure the weapon is facing the right way (fixed for inverted animation direction)
 		if (Velocity != Vector3.zero) Weapon.transform.forward = -Velocity.normalized;
 		// Play the attack animation
-		if (Input.GetButtonDown("Attack"))
+		if (Input.GetButtonDown("Attack") && AttackTimer <= 0)
 		{
 			WeaponAnimator?.SetTrigger("Attack");
+			// Set the Attack delay timer
+			AttackTimer = AttackDelayTime;
 		}
+		// Count down the attack delay counter
+		if (AttackTimer >= 0) AttackTimer -= Time.deltaTime;
 	}
 
 	void Animate()
