@@ -21,26 +21,9 @@ public class OverworldLevel : MonoBehaviour
 		Scene = GetComponent<ScenePicker>()?.scenePath;
 	}
 
-	private void OnMouseOver()
+	public void LoadLevel()
 	{
-		// Look at this level marker
-		Game.OverworldCamera.LookAt(transform);
-		Game.OverworldCamera.SetZoom(4f);
-		print("test");
-	}
-
-	private void OnMouseExit()
-	{
-		/*
-		// Look away from this level
-		Game.OverworldCamera.LookAt(null);
-		Game.OverworldCamera.SetZoom(1f);
-		*/
-	}
-
-	private void OnMouseDown()
-	{
-		// Load this level TODO
+		// Load this level
 		Game.LoadLevel(Scene);
 	}
 }
